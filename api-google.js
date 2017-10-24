@@ -6,7 +6,7 @@ var tokenFile = './token-google';
 
 var OAuth2Client = google.auth.OAuth2;
 
-var googleClient = require('./google-client.js');
+var googleClient = require('./auth-google.js');
 var oauth2Client = new OAuth2Client(googleClient.CLIENT_ID, googleClient.CLIENT_SECRET, 'urn:ietf:wg:oauth:2.0:oob');
 
 function getAccessToken(scopes, callback) {

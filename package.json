@@ -12,7 +12,9 @@
 	 "ip": "1.1.5",
 	 "express": "4.16.2",
 	 "socket.io": "2.0.3",
-	 "sqlite3": "*"
+	 "sqlite3": "*",
+	 "readline-sync": "1.4.7",
+	 "opn": "5.1.0"
   },
   "license": "MIT"
 }

@@ -93,30 +93,29 @@ function startProcess() {
 					})
 					stmt.finalize();
 	
-					bridgedItems.forEach(function(lineItem) {
-						options = {
-							'path': '/line-item?id=' + lineItem.id + '&advertiser_id=' + lineItem.advertiser_id,
-							'data': {
-								"line-item": {
-									"revenue_value": lineItem.adExRPM
+					bridgedItems.forEach(function(_lineItem, index) {
+						setTimeout(function(lineItem) {
+							apiAppNexus.appNexusRequest({
+								'path': '/line-item?id=' + lineItem.id + '&advertiser_id=' + lineItem.advertiser_id,
+								'data': {
+									"line-item": {
+										"revenue_value": lineItem.adExRPM
+									}
+								},
+								'method': 'PUT'
+							}, token, function (data) {
+								try {
+									response = JSON.parse(data);
+									if (response.response.status == 'OK')
+										console.log('Updated AppNexus LineItem (' + lineItem.id + ') - RPM: ' + lineItem.adExRPM)
+									else
+										throw new Error(response.response.error || 'Unknown error');
 								}
-							},
-							'method': 'PUT'
-						};
-										
-						console.log(options);
-						/*apiAppNexus.appNexusRequest(options, token, function (data) {
-							try {
-								response = JSON.parse(data);
-								if (response.response.status == 'OK')
-									console.log('Updated AppNexus LineItem (' + lineItem.id + ') - RPM: ' + lineItem.adExRPM)
-								else
-									throw new Error(response.response.error || 'Unknown error');
-							}
-							catch(err) {
-								console.log('Failed to update AppNexus LineItem (' + lineItem.id + ') - Error: ' + err);
-							}
-						})*/
+								catch(err) {
+									console.log('Failed to update AppNexus LineItem (' + lineItem.id + ') - Error: ' + err);
+								}
+							})
+						}, index * 1010, _lineItem);
 					})
 				});
 			})

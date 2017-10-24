@@ -2,5 +2,6 @@ database.sqlite
 token-appnexus
 token-google
 node_modules/
-google-client.js
+auth-google.js
+auth-appnexus.js
 index.js

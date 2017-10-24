@@ -32,9 +32,14 @@ exports.isValidFromDisk = function() {
 };
 
 exports.getTokenFromAPI = function(callBack) {
-	if (auth == null) {
-		console.log('\nPlease provide your AppNexus credentials')
-		auth = {"auth": {"username": readlineSync.question('Username: '), "password": readlineSync.question('Password: ', {hideEchoBack: true})}};
+	if (auth == null) {	
+		if (fs.existsSync('./auth-appnexus.js')) {
+			auth = JSON.parse(fs.readFileSync('./auth-appnexus.js', 'utf-8'));
+		}
+		else {
+			console.log('\nPlease provide your AppNexus credentials')
+			auth = {"auth": {"username": readlineSync.question('Username: '), "password": readlineSync.question('Password: ', {hideEchoBack: true})}};
+		}
 	}
 	
 	exports.appNexusRequest({'path': '/auth', 'method': 'POST'}, null, function (data) {
