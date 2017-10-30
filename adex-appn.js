@@ -55,7 +55,7 @@ function startProcess() {
 					console.log('Error getting RPM per AdTag: ' + err)
 					process.exit(0);
 				}
-				
+								
 				console.log('Received Google AdExchange AdTags report')
 				
 				apiAppNexus.getServiceByName('line-item', '&fields=id,name,advertiser_id&like_name=(gadx|', function(data) {
@@ -115,12 +115,12 @@ function startProcess() {
 									console.log('Failed to update AppNexus LineItem (' + lineItem.id + ') - Error: ' + err);
 								}
 							})
-						}, index * 1010, _lineItem);
+						}, index * 1500, _lineItem);
 					})
 				});
-			})
+			});
 		});
-	})
+	});
 }
 
 console.log('Welcome! This script will update AppNexus line items based on Google AdExchange data')

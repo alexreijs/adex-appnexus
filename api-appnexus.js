@@ -57,7 +57,7 @@ exports.getTokenFromAPI = function(callBack) {
 }
 
 exports.appNexusRequest = function(options, token, callback) {
-	defaults = {host: 'api.appnexus.com', 'port': 80, 'encoding': 'utf-8'};
+	defaults = {host: 'api-test.appnexus.com', 'port': 80, 'encoding': 'utf-8'};
 	for (key in defaults) {
 		if (typeof options[key] == 'undefined') {
 			options[key] = defaults[key];
@@ -89,7 +89,7 @@ exports.appNexusRequest = function(options, token, callback) {
 	if (options.path == '/auth' && auth !== null)
 		req.write(JSON.stringify(auth));
 	
-	if (typeof options.data != 'undefined' && options.method == 'PUT')
+	if (typeof options.data != 'undefined' && ['PUT', 'POST'].indexOf(options.method) != -1)
 		req.write(JSON.stringify(options.data));
 
 	req.end();
