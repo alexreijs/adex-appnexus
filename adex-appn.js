@@ -65,7 +65,7 @@ function startProcess() {
 					
 					appNexusLineItems = data.map(function(row) {
 						matches = row.name.match(/\(gadx\|([0-9]*)\)/) || [];
-						if (matches.length > 0)
+						if (matches.length > 1)
 							row.adExId = matches[1];
 						return row;
 					}).filter(function(row) {

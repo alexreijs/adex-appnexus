@@ -66,7 +66,7 @@ function getRPMPerAdTag(options, callback) {
 					return callback(err, []);
 				}
 				else {
-					return callback(null, response.rows || []);
+					return callback(null, response.rows);
 				}
 			})
 		}
